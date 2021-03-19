@@ -29,63 +29,77 @@
 <li>During Installation, the wizard will ask you to choose a password for the root user and to create a username, in our example the user is HdPUser and password is 123 and the root password is 123 also.</li>
 </ul>
 <p>Once instillation is finished, the system will ask you to do a reboot. The system will redirect you to the instillation steps again, to avoid this:</p>
+<ul>
+<li>From the top bar choose “Devices” >> “Optical Drive” >> “Remove Disk from Virtual Drive” the reboot “Machine” >> “Reset”.</li>
+  <li>After the machine boot being complete, login with your username and password.</li>
+  <p>"All of above are applied for all machines"</p>
 
-From the top bar choose “Devices” >> “Optical Drive” >> “Remove Disk from Virtual Drive” the reboot “Machine” >> “Reset”.
-After the machine boot being complete, login with your username and password.
-<<All of above are applied for all machines>>
 We need to go Root user
+<pre><code>
 $ su root
+</code></pre>
 Hit your password
 You are a Root user
 Warning: To reach a successful Ambari installation, you have to log with the root user itself. (user: root; password:123)
 
-Let update all machines
-
+<h4>Let update all machines</h4>
+<pre><code>
 $ yum update
+</code></pre>
+
 Warning: if the machine fail to contact the internet, run this command below and retry the update.
-
+<pre><code>
 $ dhclient (All Machines)
-(Wait… <Drink some coffee till the steps got done>)
+</code></pre>
 
-Putty is a must
+### (Wait… "Drink some coffee till the steps got done")
 
-Due to the command copy/paste will be the master step in this tutorial, we need to install putty. Thus, from putty official site, download it (x86 or x64) and install putty.
-In order to use putty, we need the IP address for the machines that already setup.
+<h5>Putty is a must</h5>
+
+<p>Due to the command copy/paste will be a master steps in this tutorial, we need to install putty. Thus, from putty official site, download it (x86 or x64) and install putty.
+In order to use putty, we need the IP address for the machines that already setup.</p>
+<pre><code>
 $ yum install net-tools (All Machines)
-To get the IP address for each machine
-
+</code></pre>
+<p>To get the IP address for each machine</p>
+<pre><code>
 $ ifconfig (All Machines)
-Now you have the ip address for all machine, just open Putty separately and paste the IP, then login to the machines as you did before a while, as a root.
+</code></pre>
+<p>Now you have the ip address for all machine, just open Putty separately and paste the IP, then login to the machines as you did before a while, as a root.</p>
 
-Machines are ready to start setup Ambari pre-requisites.
+<h4>Setup Ambari pre-requisites.</h4>
 
-Change the run level to multi user (all nodes)
-
+<p>Change the run level to multi user (all nodes)</p>
+<pre><code>
 $ systemctl set-default multi-user.target 
 $ systemctl get-default (to check if it multi user target)
-Change the host name (all nodes)
+</code></pre>
 
-Warning: the names are master.hadoop.com for the master node, and slave1.hadoop.com for slave1 node, slave2.hadoop.com for slave2… 
-
+<p>Change the host name (all nodes)</p>
+#### Warning: the names are master.hadoop.com for the master node, and slave1.hadoop.com for slave1 node, slave2.hadoop.com for slave2… 
+<pre><code>
 $ vi /etc/sysconfig/network
+</code></pre>
 press “i” to edit the file
 new line
 NETWORKING=yes
 HOSTNAME=master.hadoop.com 
 press Esc then :wq then Enter
 
-Apply this command (all nodes)
-
+<p>Apply this command (all nodes)</p>
+<pre><code>
 $ hostnamectl set-hostname master.hadoop.com 
 $ hostnamectl status
-Disable firewall (All Nodes)
+</code></pre>
+<p>Disable firewall (All Nodes)</p>
 
-Its important to disable firewall between nodes to avoid any chance of connection block.
-
+<h5>Its important to disable firewall between nodes to avoid any chance of connection block.</h5>
+<pre><code>
 $ systemctl stop firewalld 
 $ systemctl disable firewalld 
 $ systemctl status firewalld
-It must be dead!
+</code></pre>
+<p>It must be dead!</p>
 
 Change VM Swappiness to 10 (All Nodes)
 
