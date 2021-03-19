@@ -1,6 +1,6 @@
 <h3>Building an HDP Hadoop cluster</h3>
-<p>Here are all the steps towards hadoop cluster.
-Horton work data platform is a customized Hadoop developed by yahoo, the reason of choosing HDP is HDP offering API services that can be used in every third party applications 
+<p>Here are all the steps towards hadoop cluster.</p>
+<p>Horton work data platform is a customized Hadoop developed by yahoo, the reason of choosing HDP is HDP offering API services that can be used in every third party applications 
 </p>
 <h4>Prerequisites:</h4>
 <ul>
@@ -12,23 +12,23 @@ Horton work data platform is a customized Hadoop developed by yahoo, the reason 
 <h3>Preparation Steps:</h3>
 
 <h4>Creating a 3 Machines</h4>
+<ul>
+<li>Click on “New” to create machine.</li>
+<li>Name your machines (Master, Slave1, Slave2).</li>
+<li>Select a path for each machine (better to setup them in an isolated partition (D:).</li>
+<li>Centos is not available in the OS list, so you can select Redhat X64 instead.</li>
+<li>Select the virtual machine RAM size (Minimum 4GB), HD size then finish.</li>
+<li>Right Click on each machine and select “Settings”. Lets set the Network connection and the installation image:</li>
 
-Click on “New” to create machine.
-Name your machines (Master, Slave1, Slave2).
-Select a path for each machine (better to setup them in an isolated partition (D:).
-Centos is not available in the OS list, so you can select Redhat X64 instead .
-Select the virtual machine RAM size (Minimum 4GB), HD size then finish.
-Right Click on each machine and select “Settings”.
-Lets set the Network connection and the installation image:
-
-Choose “Network” then set “Attached To: Bridget Adapter”
-From “Settings” Also choose “Storage”
-Under “Controller:IDE” Click on “Empty” then in “Optical Drive” choose the path that CentOS img is located inside.
-VM Setup is done, now lets run the machines by click on “Start” The green Arrow in the top Bar.
-After seconds, the setup will ask you to choose what you want to do with the machine, Of course we will install CentOS.
-The Wizard is Easy (Select the OS Ver, Optical Drive, Location, Switch on the Network) then Hit Install/OK.
-During Installation, the wizard will ask you to choose a password for the root user and to create a username, in our example the user is HdPUser and password is 123 and the root password is 123 also.
-Once instillation is finished, the system will ask you to do a reboot. The system will redirect you to the instillation steps again, to avoid this:
+<li>Choose “Network” then set “Attached To: Bridget Adapter”</li>
+<li>From “Settings” Also choose “Storage”</li>
+<li>Under “Controller:IDE” Click on “Empty” then in “Optical Drive” choose the path that CentOS img is located inside.</li>
+<li>VM Setup is done, now lets run the machines by click on “Start” The green Arrow in the top Bar.</li>
+<li>After seconds, the setup will ask you to choose what you want to do with the machine, Of course we will install CentOS.</li>
+<li>The Wizard is Easy (Select the OS Ver, Optical Drive, Location, Switch on the Network) then Hit Install/OK.</li>
+<li>During Installation, the wizard will ask you to choose a password for the root user and to create a username, in our example the user is HdPUser and password is 123 and the root password is 123 also.</li>
+</ul>
+<p>Once instillation is finished, the system will ask you to do a reboot. The system will redirect you to the instillation steps again, to avoid this:</p>
 
 From the top bar choose “Devices” >> “Optical Drive” >> “Remove Disk from Virtual Drive” the reboot “Machine” >> “Reset”.
 After the machine boot being complete, login with your username and password.
