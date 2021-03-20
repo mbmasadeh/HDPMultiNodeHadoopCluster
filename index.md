@@ -247,7 +247,7 @@ $ chown -R /var/run/ambari-agent (all nodes)
 <li>“Assign Slaves and Clients” choose what to install in masters and nods then Click NEXT.</li>
 <li>Please provide credentials for all services, i suggest you to use the same username and password for all services.</li>
 <li>Last step is validation, then click Deploy to start the installation session.</li>
-</ul>
+
   <p>50 Min is the required time for a success installation.</p>
 <p>If the installation Fail, check the error and click "Retry"</p>
 <p>Done, your cluster is ready.</p>
