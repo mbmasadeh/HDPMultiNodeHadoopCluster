@@ -221,24 +221,33 @@ $ chown -R /var/run/ambari-agent (all nodes)
 
 <h4>Run Ambari server on Web browser</h4>
 
-"MasterIpAdress":8080
-username and password is admin, admin
+<h4>"MasterIpAdress":8080</h4>
 
-Download and install Hadoop Echo system and run the cluster
+<p>username and password is admin, admin</p>
 
-The steps now will run will the Ambari server wizard
+<h5>Download and install Hadoop Echo system and run the cluster</h5>
 
-Start a new Cluster
-Click On Launch install Wizard
-Give your cluster a name then NEXT
-Select your version then Click NEXT
-Write your hosts full name including the master node (FQDM). Ex: master.hadoop.com                                                                                                                      slave1.hadoop.com                                                                                                                       slave2.hadoop.com
-In the same page (Host registration information) choose Perform manual registration on hosts and do not use SSH, due to we setup Amabri agent already.
-In the host registration, if you did everything right, your host registration will success in green. Click NEXT
-Select the services you want to install then click next.                                                        Warning: to make it easy, just choose the minimal ecosystems that can start hadoop normally are: HDFS, MapReduce,Yarn and Hbase. note that the system will force you to choose some other services, just agree and select next.                                Warning: do not choose the services that required a pre-installed database such as hive and oozie, in the next session i’ll show how to install them.
-“Assign masters” page, change on which hosts you want to install the services then click NEXT.
-“Assign Slaves and Clients” choose what to install in masters and nods then Click Next.
-Please provide credentials for all services, i suggest you to use the same username and password for all services.
-Last step is validation, then click Deploy to start the installation session.
-50 Min is the required time for a success installation.
-Done, your cluster is ready.
+<p>The steps now will run will the Ambari server wizard</p>
+<ul>
+<li>Start a new Cluster</li>
+<li>Click On Launch install Wizard</li>
+<li>Give your cluster a name then NEXT</li>
+<li>Select your version then Click NEXT</li>
+<li>Write your hosts full name including the master node (FQDM) as a list names. Ex:</li>
+  <p>master.hadoop.com</p>
+  <p>slave1.hadoop.com</p>   
+  <p>slave2.hadoop.com</p>
+<li>In the same page (Host registration information) choose Perform manual registration on hosts and do not use SSH, due to we setup Amabri agent already.</li>
+<li>In the host registration, if you did everything right, your host registration will success in green. Click NEXT.</li>
+<li>Select the services you want to install then click NEXT.                                                     
+<p>Warning: to make it easy, just choose the minimal ecosystems that can start hadoop normally are: HDFS, MapReduce,Yarn and Hbase. note that the system will force you to choose some other services, just agree and select next.</p>                               
+<p>Warning: do not choose the services that required a pre-installed database such as hive and oozie, in the next session i’ll show how to install them.</p>
+
+<li>“Assign masters” page, change on which hosts you want to install the services then click NEXT.</li>
+<li>“Assign Slaves and Clients” choose what to install in masters and nods then Click NEXT.</li>
+<li>Please provide credentials for all services, i suggest you to use the same username and password for all services.</li>
+<li>Last step is validation, then click Deploy to start the installation session.</li>
+</ul
+  <p>50 Min is the required time for a success installation.</p>
+<p>If the installation Fail, check the error and click "Retry</p>
+<p>Done, your cluster is ready.</p>
