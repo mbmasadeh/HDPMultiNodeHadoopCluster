@@ -34,7 +34,7 @@
   <li>After the machine boot being complete, login with your username and password.</li>
   <p>"All of above are applied for all machines"</p>
 
-We need to go Root user
+<p>We need to go Root user</p>
 <pre><code>
 $ su root
 </code></pre>
@@ -52,7 +52,7 @@ Warning: if the machine fail to contact the internet, run this command below and
 $ dhclient (All Machines)
 </code></pre>
 
-### (Wait… "Drink some coffee till the steps got done")
+<p>(Wait… "Drink some coffee till the steps got done")</p>
 
 <h5>Putty is a must</h5>
 
@@ -69,14 +69,14 @@ $ ifconfig (All Machines)
 
 <h4>Setup Ambari pre-requisites.</h4>
 
-<p>Change the run level to multi user (all nodes)</p>
+<h5>Change the run level to multi user (all nodes)</h5>
 <pre><code>
 $ systemctl set-default multi-user.target 
 $ systemctl get-default (to check if it multi user target)
 </code></pre>
 
-<p>Change the host name (all nodes)</p>
-#### Warning: the names are master.hadoop.com for the master node, and slave1.hadoop.com for slave1 node, slave2.hadoop.com for slave2… 
+<h5>Change the host name (all nodes)</h5>
+Warning: the names are master.hadoop.com for the master node, and slave1.hadoop.com for slave1 node, slave2.hadoop.com for slave2… 
 <pre><code>
 $ vi /etc/sysconfig/network
 </code></pre>
@@ -88,13 +88,13 @@ press Esc then :wq then Enter
 
 <p>Apply this command (all nodes)</p>
 <pre><code>
-$ hostnamectl set-hostname master.hadoop.com 
+$ hostnamectl set-hostname master.hadoop.com (Dont forget to change the name for the other nodes)
 $ hostnamectl status
 </code></pre>
 
-### Disable firewall (All Nodes)
+<h5>Disable firewall (All Nodes)</h5>
 
-<h5>Its important to disable firewall between nodes to avoid any chance of connection block.</h5>
+<p>Its important to disable firewall between nodes to avoid any chance of connection block.</p>
 <pre><code>
 $ systemctl stop firewalld 
 $ systemctl disable firewalld 
@@ -102,7 +102,7 @@ $ systemctl status firewalld
 </code></pre>
 <p>It must be dead!</p>
 
-### Change VM Swappiness to 10 (All Nodes)
+<h5>Change VM Swappiness to 10 (All Nodes)</h5>
 
 <p>This control is used to define how aggressive the kernel will swap
 memory pages.</p>
@@ -110,7 +110,7 @@ memory pages.</p>
 $ echo "vm.swappiness= 10" >> /etc/sysctl.conf
 </code></pre>
 
-### Disable SE Linux (All nodes)
+<h5>Disable SE Linux (All nodes)</h5>
 <pre><code>
 $ vi /etc/selinux/config
 </code></pre>
@@ -118,21 +118,24 @@ press “i”
 set selinux from enforcing to disabled
 press “Esc” then :wq to quit
 
-ntp installing (All Nodes)
-
+<h5>ntp installing (All Nodes)</h5>
+<pre><code>
 $ yum -y install ntp 
 $ systemctl enable ntpd 
 $ systemctl start ntpd 
 $ systemctl status ntpd (green active)
-Disable THP (All Nodes)
+</code></pre>
 
+<h5>Disable THP (All Nodes)</h5>
+<pre><code>
 vi /etc/rc.local
-Delete this line First
-
+</code></pre>
+<p>Delete this line First</p>
+<pre><code>
 touch /var/lock/subsys/local
-
-and paste these lines and the end of the file
-
+</code></pre>
+<p>and paste these lines and the end of the file</p>
+<pre><code>
 echo ‘Restarting network service’
 service network restart
 chmod +x /etc/aws114_bootlog.sh
@@ -140,71 +143,85 @@ chmod +x /etc/aws114_bootlog.sh
 touch /var/lock/subsys/local
 $ echo “never” > /sys/kernel/mm/transparent_hugepage/enabled
 $ echo “never” > /sys/kernel/mm/transparent_hugepage/defrag
-——————————————-
+</code></pre>
 
-Update host file (All Nodes) 
-
+<h5>Update host file (All Nodes)</h5>
+<pre><code>
 $ vi /etc/hosts
+</code></pre>
 press i
 start a new lines add this line ref for every node in your cluster
 Example:
-
+<pre><code>
 192.1.1.1 master.hadoop.com master
 192.2.2.2 slave1.hadoop.com slave1
 192.3.3.3 slave2.hadoop.com slave2
+</code></pre>
 press Esc then :wq
 
-Then Enter reboot After reboot you will notice that the host name has been changed.
-
+Then paste this command "reboot". After reboot you will notice that the host name has been changed.
+<pre><code>
 $ reboot
+</code></pre>
 To make sure about your hosts name
-
+<pre><code>
 $ cat /etc/hosts
-Setup Ambari server (Master Node only)
+</code></pre>
 
-Download and install Ambari server in master node only on the browser navigate to this link:
-https://docs.cloudera.com/HDPDocuments/Ambari-2.7.0.0/bk_ambari-installation/content/ambari_repositories.html
+<h4>Setup Ambari server (Master Node only)</h4>
+
+<p>Download and install Ambari server in master node only on the browser navigate to this link:</p>
+<p>https://docs.cloudera.com/HDPDocuments/Ambari-2.7.0.0/bk_ambari-installation/content/ambari_repositories.html</p>
 
 Choose the ambari version on Centos7 “Repo file” if you want.
 
 Back to master machine
-
+<pre><code>
 $ cd /etc/yum.repos.d 
 $ yum -y install wget 
 $ wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo 
 $ yum -y install ambari-server ambari-agent
-Do the same thing with other machines but install only ambari agent
-
+</code></pre>
+<p>Do the same thing with other machines but install only ambari agent</p>
+<pre><code>
 $ cd /etc/yum.repos.d 
 $ yum -y install wget 
 $ wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/ambari.repo 
 $ yum -y install ambari-agent
-Setup All ambari agent to connect to the Master node (All Nodes)
+</code></pre>
 
-Get the master Hostname and past it in all ambari agents (master node)
-
+<h4>Setup All ambari agents to connect to the Master node (All Nodes)</h4>
+<p>Get the master Hostname and past it in all ambari agents (master node)</p>
+<pre><code>
 $ hostname -f
-Get the hostname and go to all ambari agents (All nodes) only to paste the host name there.
-
+</code></pre>
+<p>Get the hostname and go to all ambari agents (All nodes) only to paste the host name there.</p>
+<pre><code>
 $ vi /etc/ambari-agent/conf/ambari-agent.ini
+</code></pre>
 go to [server] information and change localhost to your master node name <master.hadoop.com>
 
-Setup Ambari server (Master node only)
-
+<h5>Setup Ambari server (Master node only)</h5>
+<pre><code>
 $ ambari-server setup
-Accept the default settings
-
+</code></pre>
+<p>Accept the default settings</p>
+<pre><code>
 $ ambari-server start
-Start ambari-agent on all hosts
-
+</code></pre>
+<p>Start ambari-agent on all hosts</p>
+<pre><code>
 $ ambari-agent start (All nodes)
-Add some permission to the user that running Ambari server already
-
+</code></pre>
+<p>Add some permission to the user that running Ambari server already</p>
+<pre><code>
 $ chown -R /var/run/ambari-server (master node only) 
 $ chown -R /var/run/ambari-agent (all nodes)
-Run Ambari server on Web browser
+</code></pre>
 
-<MasterIpAdress>:8080
+<h4>Run Ambari server on Web browser</h4>
+
+"MasterIpAdress":8080
 username and password is admin, admin
 
 Download and install Hadoop Echo system and run the cluster
