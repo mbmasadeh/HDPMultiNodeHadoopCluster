@@ -249,5 +249,5 @@ $ chown -R /var/run/ambari-agent (all nodes)
 <li>Last step is validation, then click Deploy to start the installation session.</li>
 </ul>
   <p>50 Min is the required time for a success installation.</p>
-<p>If the installation Fail, check the error and click "Retry</p>
+<p>If the installation Fail, check the error and click "Retry"</p>
 <p>Done, your cluster is ready.</p>
