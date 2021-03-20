@@ -91,7 +91,8 @@ press Esc then :wq then Enter
 $ hostnamectl set-hostname master.hadoop.com 
 $ hostnamectl status
 </code></pre>
-<p>Disable firewall (All Nodes)</p>
+
+### Disable firewall (All Nodes)
 
 <h5>Its important to disable firewall between nodes to avoid any chance of connection block.</h5>
 <pre><code>
@@ -101,15 +102,18 @@ $ systemctl status firewalld
 </code></pre>
 <p>It must be dead!</p>
 
-Change VM Swappiness to 10 (All Nodes)
+### Change VM Swappiness to 10 (All Nodes)
 
-This control is used to define how aggressive the kernel will swap
-memory pages.
-
+<p>This control is used to define how aggressive the kernel will swap
+memory pages.</p>
+<pre><code>
 $ echo "vm.swappiness= 10" >> /etc/sysctl.conf
-Disable SE Linux (All nodes)
+</code></pre>
 
+### Disable SE Linux (All nodes)
+<pre><code>
 $ vi /etc/selinux/config
+</code></pre>
 press “i”
 set selinux from enforcing to disabled
 press “Esc” then :wq to quit
